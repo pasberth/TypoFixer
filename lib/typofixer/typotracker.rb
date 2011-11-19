@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
 
+# typoを検出するデバッガ。Kernelにincludeすればプログラム全体を監視する
 module TypoFixer::TypoTracker
 
   alias typofixer_original_method_missing method_missing
@@ -43,19 +44,34 @@ module TypoFixer::TypoTracker
       most += that
     end
 
-    if most.one?
-      typo_hook e, most.first, funcname, *args, &blk
-    else
-      raise e
+    return typo_hook e, most.first, funcname, *args, &blk unless most.empty?
+
+    seq.length.times do |i|
+      t = seq.clone
+      t[i] = '.'
+      t[i+1] = '.'
+      that = methods.grep /^#{t.join}$/
+      next if that.empty?
+      most += that
     end
+
+    return typo_hook e, most.first, funcname, *args, &blk unless most.empty?
+
+    raise e
   end
 
   def method_missing funcname, *args, &blk
-    return nil if funcname == :to_ary
-    typofixer_original_method_missing funcname, *args, &blk
-  rescue NameError => e # レシーバが存在しない場合
-    typo_hook_without_receiver e, funcname, *args, &blk
-  rescue NoMethodError => e # レシーバが存在する場合
-    typo_hook_with_receiver e, funcname, *args, &blk
+    # システムで予約されたものはキャッチしない
+    if [:to_ary, :to_path, :to_str, :to_hash, :to_int, :to_io, :to_regexp, :to_proc].include? funcname
+      super
+    end
+
+    begin
+      super
+    rescue NameError => e # レシーバが存在しない場合
+      typo_hook_without_receiver e, funcname, *args, &blk
+    rescue NoMethodError => e # レシーバが存在する場合
+      typo_hook_with_receiver e, funcname, *args, &blk
+    end
   end
 end

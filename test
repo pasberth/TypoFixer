@@ -1,8 +1,25 @@
-
+#!/usr/bin/env ruby
 require "./lib/typofixer"
 
+$typoout = open './log/typo.out', 'w'
+
 include TypoFixer::TypoTracker
+
+def typoout
+  $typoout
+
+p Object.kind_of? Kernel
+p Object.kind_of? TypoFixer::TypoTracker
+
+p private_methods 
 
 p methoda
 
 purs "test"
+
+ptus "test"
+
+instannce_eval do
+end
+
+$typoout.close
