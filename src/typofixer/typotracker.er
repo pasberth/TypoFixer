@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
 
+# typoを検出するデバッガ。Kernelにincludeすればプログラム全体を監視する
 module TypoFixer::TypoTracker
 
   alias typofixer_original_method_missing method_missing
