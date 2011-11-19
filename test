@@ -1,0 +1,8 @@
+
+require "./lib/typofixer"
+
+include TypoFixer::TypoTracker
+
+p methoda
+
+purs "test"
