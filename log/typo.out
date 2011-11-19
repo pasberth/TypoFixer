@@ -1,5 +1,5 @@
 もしかして: methods
-	/Users/pasberth/git_local/TypoFixer/lib/typofixer/typotracker.rb:70:in `method_missing'
+	/Users/pasberth/git_local/TypoFixer/lib/typofixer/typotracker.rb:115:in `method_missing'
 	test:17:in `<main>'
 	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby.rb:88:in `eval'
 	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby.rb:88:in `ereval'
@@ -10,7 +10,7 @@
 	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/bin/endlessruby:19:in `load'
 	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/bin/endlessruby:19:in `<main>'
 もしかして: puts
-	/Users/pasberth/git_local/TypoFixer/lib/typofixer/typotracker.rb:70:in `method_missing'
+	/Users/pasberth/git_local/TypoFixer/lib/typofixer/typotracker.rb:115:in `method_missing'
 	test:19:in `<main>'
 	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby.rb:88:in `eval'
 	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby.rb:88:in `ereval'
@@ -21,8 +21,19 @@
 	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/bin/endlessruby:19:in `load'
 	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/bin/endlessruby:19:in `<main>'
 もしかして: puts
-	/Users/pasberth/git_local/TypoFixer/lib/typofixer/typotracker.rb:70:in `method_missing'
+	/Users/pasberth/git_local/TypoFixer/lib/typofixer/typotracker.rb:115:in `method_missing'
 	test:21:in `<main>'
+	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby.rb:88:in `eval'
+	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby.rb:88:in `ereval'
+	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby/main.rb:40:in `block in main'
+	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby/main.rb:39:in `open'
+	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby/main.rb:39:in `main'
+	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/bin/endlessruby:5:in `<top (required)>'
+	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/bin/endlessruby:19:in `load'
+	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/bin/endlessruby:19:in `<main>'
+もしかして: instance_eval
+	/Users/pasberth/git_local/TypoFixer/lib/typofixer/typotracker.rb:115:in `method_missing'
+	test:23:in `<main>'
 	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby.rb:88:in `eval'
 	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby.rb:88:in `ereval'
 	/Users/pasberth/.rvm/gems/ruby-1.9.2-p290/gems/endlessruby-0.0.1/lib/endlessruby/main.rb:40:in `block in main'

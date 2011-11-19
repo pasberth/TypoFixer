@@ -27,27 +27,61 @@ module TypoFixer::TypoTracker
   def typo_hook_with_receiver e, fn, *as, &b
     typo(e, methods, fn, *as, &b)        
 
+  def typo_cases
+    return @typo_cases if @typo_cases
+    (@typo_cases = []).tap do |typo_cases|
+      @typo_cases << proc do |e, methods, funcname, *args, &blk|
+        most = []
+        seq = funcname.to_s.split //
+        seq.length.times do |i|
+          t = seq.clone
+          t[i] = '.'
+          that = methods.grep /^#{t.join}$/
+          most += that.reject { |item| most.include? item }
+
+        if most.one?
+          typo_hook e, most.first, funcname, *args, &blk
+        else
+          raise e
+        
+
+      @typo_cases << proc do |e, methods, funcname, *args, &blk|
+        most = []
+        seq = funcname.to_s.split //
+        seq.length.times do |i|
+          t = seq.clone
+          t[i] = '.'
+          t[i+1] = '.'
+          that = methods.grep /^#{t.join}$/
+          most += that.reject { |item| most.include? item }
+
+        if most.one?
+          typo_hook e, most.first, funcname, *args, &blk
+        else
+          raise e
+
+      @typo_cases << proc do |e, methods, funcname, *args, &blk|
+        most = []
+        seq = funcname.to_s.split //
+        seq.length.times do |i|
+          t = seq.clone
+          t.delete_at i
+          t.delete_at i
+          t[i] = '.{0,4}'
+          that = methods.grep /^#{t.join}$/
+          most += that.reject { |item| most.include? item }
+
+        if most.one?
+          typo_hook e, most.first, funcname, *args, &blk
+        else
+          raise e
+    
+
   def typo e, methods, funcname, *args, &blk
-    seq = funcname.to_s.split //
-    most = []
-    seq.length.times do |i|
-      t = seq.clone
-      t[i] = '.'
-      that = methods.grep /^#{t.join}$/
-      next if that.empty?
-      most += that
-
-    return typo_hook e, most.first, funcname, *args, &blk unless most.empty?
-
-    seq.length.times do |i|
-      t = seq.clone
-      t[i] = '.'
-      t[i+1] = '.'
-      that = methods.grep /^#{t.join}$/
-      next if that.empty?
-      most += that
-
-    return typo_hook e, most.first, funcname, *args, &blk unless most.empty?
+    typo_cases.each do |_case|
+      begin
+        return _case.call e, methods, funcname, *args, &blk
+      rescue Exception
 
     raise e
 
