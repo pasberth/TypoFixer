@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 require "./lib/typofixer"
 
-$typoout = open './log/typo.out', 'w'
+# $typoout = open './log/typo.out', 'w'
 
 include TypoFixer::TypoTracker
 
-def typoout
-  $typoout
+# def typoout
+#   $typoout
 
 p Object.kind_of? Kernel
 p Object.kind_of? TypoFixer::TypoTracker
@@ -22,4 +22,4 @@ ptus "test"
 instannce_eval do
 end
 
-$typoout.close
+# $typoout.close

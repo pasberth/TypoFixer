@@ -4,10 +4,6 @@
 # typoを検出するデバッガ。Kernelにincludeすればプログラム全体を監視する
 module TypoFixer::TypoTracker
 
-  alias typofixer_original_method_missing method_missing
-
-  private 
-
   def typoin
     $stdin
   end
@@ -30,7 +26,7 @@ module TypoFixer::TypoTracker
 
 
   def typo_hook_with_receiver e, fn, *as, &b
-    typo(e, methods, fn, *as, &b)        
+    typo(e, methods, fn, *as, &b)
   end
 
   def typo_cases
