@@ -5,6 +5,7 @@ require 'give4each'
 include TypoFixer::TypoTracker
 
 self.typoout = open "typo.out", "w"
+self.typoout = nil
 p typoout
 p %w[ruby python].map &:upcas.of_concat("ist")
 p %w[ruby python].map &:upcas.of_conca("ist")

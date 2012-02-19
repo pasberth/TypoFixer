@@ -21,19 +21,31 @@ module TypoFixer::TypoTracker
   end
   
   def typo_hook e, ifn, fn, *as, &b
-    typoout.write "もしかして: #{ifn}\n"
-    $@.each do |at|
-      typoout.write "\t#{at}\n"
+    if typoout
+      typoout.write "もしかして: #{ifn}\n"
+      $@.each do |at|
+        typoout.write "\t#{at}\n"
+      end
     end
     send ifn, *as, &b
   end
 
-  def typo_hook_without_receiver e, fn, *as, &b
+  def typo e, methods, funcname, *args, &blk
+    typo_cases.each do |_case|
+      begin
+        return _case.call e, methods, funcname, *args, &blk
+      rescue Exception
+      end
+    end
+
+    raise e
+  end
+
+  def typo_without_receiver e, fn, *as, &b
     typo(e, methods + private_methods, fn, *as, &b)
   end
 
-
-  def typo_hook_with_receiver e, fn, *as, &b
+  def typo_with_receiver e, fn, *as, &b
     typo(e, methods, fn, *as, &b)
   end
 
@@ -96,18 +108,6 @@ module TypoFixer::TypoTracker
       end
     end
   end
-    
-
-  def typo e, methods, funcname, *args, &blk
-    typo_cases.each do |_case|
-      begin
-        return _case.call e, methods, funcname, *args, &blk
-      rescue Exception
-      end
-    end
-
-    raise e
-  end
 
   def method_missing funcname, *args, &blk
     # システムで予約されたものはキャッチしない
@@ -118,9 +118,9 @@ module TypoFixer::TypoTracker
     begin
       super
     rescue NameError => e # レシーバが存在しない場合
-      typo_hook_without_receiver e, funcname, *args, &blk
+      typo_without_receiver e, funcname, *args, &blk
     rescue NoMethodError => e # レシーバが存在する場合
-      typo_hook_with_receiver e, funcname, *args, &blk
+      typo_with_receiver e, funcname, *args, &blk
     end
   end
 end
