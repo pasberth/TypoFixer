@@ -10,6 +10,16 @@
 
 puts を purs とか typo したときに推測して puts を呼び出したうえでログを出力するデバッガ的なあれ
 
+== 便利な使い方
+
+とりあえず ~/.irbrc とかに
+
+  require 'typofixer'
+  include TypoFixer::TypoTracker
+  self.typoout = nil
+
+って書いておけばいろいろ捗りますよ
+
 == usage
 
 普通に使う
