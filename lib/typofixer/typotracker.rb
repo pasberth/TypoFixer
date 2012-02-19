@@ -11,7 +11,15 @@ module TypoFixer::TypoTracker
   def typoout
     $stdout
   end
-
+  
+  [:typoin, :typoout].each do |a|
+    define_method :"#{a}=" do |v|
+      self.class.send :define_method, a do
+        v
+      end
+    end
+  end
+  
   def typo_hook e, ifn, fn, *as, &b
     typoout.write "もしかして: #{ifn}\n"
     $@.each do |at|

@@ -1,0 +1,12 @@
+require './lib/typofixer'
+require 'give4each'
+#require "./lib/typofixer"
+
+include TypoFixer::TypoTracker
+
+self.typoout = open "typo.out", "w"
+p typoout
+p %w[ruby python].map &:upcas.of_concat("ist")
+p %w[ruby python].map &:upcas.of_conca("ist")
+
+
