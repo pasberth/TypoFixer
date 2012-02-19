@@ -1,0 +1,5 @@
+lib/typofixer.rb
+lib/typofixer/typotracker.rb
+README.rdoc
+History.txt
+Manifest.txt

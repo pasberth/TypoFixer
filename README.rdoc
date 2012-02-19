@@ -1,5 +1,18 @@
+= TypoFixer
 
-Usage:
+* https://github.com/pasberth/TypoFixer
+
+== install
+
+  gem install typofixer
+
+== description
+
+puts を purs とか typo したときに推測して puts を呼び出したうえでログを出力するデバッガ的なあれ
+
+== usage
+
+普通に使う
 
     require "typofixer"
 
@@ -11,7 +24,7 @@ Usage:
     # ... caller ...
     # hello typo # 期待される出力.
 
----
+出力しないで使う
 
     self.typoout = nil
 
@@ -19,7 +32,7 @@ Usage:
 
     # hello typo # もしかして: も caller も出力されない
 
----
+ログファイルに書き出す
 
     self.typoout = open "typo.out", "a"
     
